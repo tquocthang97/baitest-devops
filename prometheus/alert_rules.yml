@@ -1,0 +1,19 @@
+groups:
+  - name: API_Alerts
+    rules:
+      - alert: TestDevOpsAPIIsDown
+        expr: probe_success{instance="http://app:5000/test-devops"} == 0
+        for: 0
+        labels:
+          severity: Critical
+        annotations:
+          title: "API Test DevOps is Down"
+          description: "The API endpoint {{ $labels.instance }} is returning non-200 responses."
+      - alert: HTTP API502 Status Code
+        expr: probe_http_status_code{instance="http://app:5000/simulate-error"} == 502
+        for: 0
+        labels:
+          severity: Critical
+        annotations:
+          title: "HTTP API 502 Status Code"
+          description: "The API endpoint {{ $labels.instance }} is returning {{ $value }} status code"
