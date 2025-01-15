@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app
+    container_name: web_app
+    environment:
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_DB=testdb
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=testdb
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+      - mysql
+    networks:
+      - monitoring
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - monitoring
+    environment:
+      MONGO_INITDB_DATABASE: testdb
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+#    ports:
+#      - "3306:3306"
+    networks:
+      - monitoring
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: testdb
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager/config.yml:/etc/alertmanager/config.yml
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+    ports:
+      - "9093:9093"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+    - ./grafana/provisioning:/etc/grafana/provisioning
+    - ./grafana/provisioning/dashboards:/var/lib/grafana/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    networks:
+      - monitoring
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter
+    volumes:
+      - ./blackbox-exporter/config.yml:/etc/blackbox-exporter/config.yml
+    command:
+      - '--config.file=/etc/blackbox-exporter/config.yml'
+    ports:
+      - "9115:9115"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
