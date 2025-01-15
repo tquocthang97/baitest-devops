@@ -21,12 +21,18 @@ services:
       - mysql
     networks:
       - monitoring
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/test-devops"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   mongo:
     image: mongo:latest
     container_name: mongo
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
     networks:
       - monitoring
     environment:
@@ -51,8 +57,8 @@ services:
       - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - "9090:9090"
+    # ports:
+    #   - "9090:9090"
     networks:
       - monitoring
 
@@ -63,8 +69,8 @@ services:
       - ./alertmanager/config.yml:/etc/alertmanager/config.yml
     command:
       - '--config.file=/etc/alertmanager/config.yml'
-    ports:
-      - "9093:9093"
+    # ports:
+    #   - "9093:9093"
     networks:
       - monitoring
 
@@ -97,8 +103,23 @@ services:
       - ./blackbox-exporter/config.yml:/etc/blackbox-exporter/config.yml
     command:
       - '--config.file=/etc/blackbox-exporter/config.yml'
-    ports:
-      - "9115:9115"
+    # ports:
+    #   - "9115:9115"
+    networks:
+      - monitoring
+
+  request-generator:
+    image: curlimages/curl:latest
+    container_name: request_generator
+    depends_on:
+      app:
+        condition: service_healthy
+    command: >
+      sh -c "
+      while true; do
+        curl -s -o /dev/null -w '%{http_code}\\n' http://app:5000/test-devops;
+        sleep 1;
+      done"
     networks:
       - monitoring
 
