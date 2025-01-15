@@ -52,40 +52,6 @@ cd baitest-devops
 ```bash
 docker-compose up -d
 ```
-
-### **3. Tạo tập lệnh sinh request (generate request)**
-
-Tạo tệp lệnh `generate_request.sh` để gửi 2000 request đến API `test-devops`:
-
-#### **Nội dung tệp `generate_request.sh`:**
-
-```bash
-#!/bin/bash
-
-URL="http://localhost:5000/test-devops"
-CONCURRENT_REQUESTS=50
-TOTAL_REQUESTS=2000
-
-for i in $(seq 1 $TOTAL_REQUESTS); do
-  {
-    curl -s -o /dev/null -w "%{http_code}\n" "$URL" &
-  } &> /dev/null
-  if (( $i % $CONCURRENT_REQUESTS == 0 )); then
-    wait
-  fi
-done
-
-wait
-echo "Hoàn thành $TOTAL_REQUESTS request đến $URL."
-```
-
-#### **Cách chạy script:**
-
-```bash
-chmod +x generate_request.sh
-./generate_request.sh
-```
-
 ---
 
 ## Giám sát trên Grafana
