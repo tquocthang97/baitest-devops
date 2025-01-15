@@ -36,6 +36,10 @@ Hệ thống bao gồm nhiều thành phần để giám sát và cảnh báo:
 ### **6. MongoDB**
 - Cơ sở dữ liệu dùng để kiểm tra kết nối từ Python App.
 
+### **6. Request Generator**
+- Tự động gửi request đến API /test-devops khi hệ thống khởi động.
+- Giúp giả lập lưu lượng request thực tế cho API.
+
 ---
 
 ## Hướng dẫn sử dụng
