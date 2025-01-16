@@ -122,6 +122,28 @@ services:
       done"
     networks:
       - monitoring
-
+#Mysql-Exporter
+  mysql-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysql_exporter
+    command: 
+      - --config.my-cnf=/cfg/.my.cnf
+      - --mysqld.address=mysql:3306
+    volumes:
+      - "./mysqld-exporter/my.cnf:/cfg/.my.cnf"
+    ports:
+      - "9104:9104"
+    networks:
+      - monitoring
+#Mongo-Exporter
+  mongo-exporter:
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo_exporter
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017
+    ports:
+      - "9216:9216"
+    networks:
+      - monitoring
 networks:
   monitoring:
