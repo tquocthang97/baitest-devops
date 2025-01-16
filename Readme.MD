@@ -31,16 +31,18 @@ Hệ thống bao gồm nhiều thành phần để giám sát và cảnh báo:
 ### **4. Node Exporter**
 - Giám sát tài nguyên hệ thống: CPU, RAM, Disk...
 
-### **5. Blackbox Exporter**
+### **5. Blackbox Exporter **
 - Kiểm tra trạng thái và mã HTTP từ API (success rate, latency).
 
 ### **6. MongoDB**
 - Cơ sở dữ liệu dùng để kiểm tra kết nối từ Python App.
 
-### **6. Request Generator**
+### **7. Request Generator**
 - Tự động gửi request đến API /test-devops khi hệ thống khởi động.
 - Giúp giả lập lưu lượng request thực tế cho API.
 
+### **8. Mongo Exporter **
+### **9. Mysql Exporter **
 ---
 
 ## Hướng dẫn sử dụng
@@ -53,6 +55,7 @@ cd baitest-devops
 ```
 
 ### **2. Chạy Docker Compose**
+- Thay thế URL Webhook sau đó khởi động docker compose
 
 ```bash
 docker compose up -d
