@@ -23427,7 +23427,8 @@
     "refresh": "1m",
     "schemaVersion": 40,
     "tags": [
-      "linux"
+      "linux",
+      "server monitor"
     ],
     "templating": {
       "list": [
