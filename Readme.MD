@@ -54,7 +54,7 @@ cd baitest-devops
 ### **2. Chạy Docker Compose**
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 ---
 
@@ -77,7 +77,7 @@ Truy cập Grafana tại [http://localhost:3000](http://localhost:3000):
 ### **1. Ngắt MongoDB để kiểm tra:**
 
 ```bash
-docker-compose stop mongo
+docker compose stop mongo
 ```
 
 - API `simulate-error` sẽ trả HTTP 502 do không kết nối được đến MongoDB.
@@ -86,7 +86,7 @@ docker-compose stop mongo
 ### **2. Bật lại MongoDB:**
 
 ```bash
-docker-compose start mongo
+docker compose start mongo
 ```
 
 ---
