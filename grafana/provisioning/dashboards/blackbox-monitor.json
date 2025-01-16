@@ -851,7 +851,7 @@
   "schemaVersion": 40,
   "tags": [
     "blackbox",
-    "prometheus"
+    "api monitor"
   ],
   "templating": {
     "list": [
