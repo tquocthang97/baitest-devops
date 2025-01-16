@@ -4,8 +4,8 @@
 
 Hệ thống cần cài đặt trước khi triển khai:
 
-- **Docker**
-- **Docker Compose**
+- **Docker (23.0.3 )**
+- **Docker Compose ( 2.32.3)**
 - Hệ điều hành: Linux hoặc macOS
 
 ---
