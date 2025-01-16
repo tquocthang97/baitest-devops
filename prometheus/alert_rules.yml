@@ -9,7 +9,7 @@ groups:
         annotations:
           title: "API Test DevOps is Down"
           description: "The API endpoint {{ $labels.instance }} is returning non-200 responses."
-      - alert: HTTP API502 Status Code
+      - alert: HTTP API 502 Status Code
         expr: probe_http_status_code{instance="http://app:5000/simulate-error"} == 502
         for: 0
         labels:
