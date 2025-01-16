@@ -80,7 +80,7 @@ Truy cập Grafana tại [http://localhost:3000](http://localhost:3000):
 docker-compose stop mongo
 ```
 
-- API `test-devops` sẽ trả HTTP 502 do không kết nối được đến MongoDB.
+- API `simulate-error` sẽ trả HTTP 502 do không kết nối được đến MongoDB.
 - Kiểm tra Slack channel nhận cảnh báo: [Slack Channel](https://join.slack.com/t/test-devops-org/shared_invite/zt-2xq38lhrr-9q0IW5kvZvXThoSLhchZFg).
 
 ### **2. Bật lại MongoDB:**
