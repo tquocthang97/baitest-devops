@@ -7,6 +7,7 @@ Hệ thống cần cài đặt trước khi triển khai:
 - **Docker (23.0.3 )**
 - **Docker Compose ( 2.32.3)**
 - Hệ điều hành: Linux hoặc macOS
+- Join Space slack [Slack Channel](https://join.slack.com/t/test-devops-org/shared_invite/zt-2xq38lhrr-9q0IW5kvZvXThoSLhchZFg) , channel #all-test-devops để kiểm tra Alert
 
 ---
 
