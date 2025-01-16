@@ -65,10 +65,9 @@ Truy cập Grafana tại [http://localhost:3000](http://localhost:3000):
 - **Tài khoản:** `admin`
 - **Mật khẩu:** `admin`
 
-### **1. Dashboard giám sát:**
-- **Server:** CPU, RAM, Disk.
-- **Blackbox Exporter:** Trạng thái và thời gian phản hồi API.
-- **Tổng quan:** API success rate, resource usage, performance, latency.
+### **1.Có 2 Dashboard giám sát:**
+- **Node Monitor Resource:** Monitor các trạng thái CPU, RAM, Disk của server
+- **Blackbox API Monitor:** Trạng thái và thời gian phản hồi API.
 
 ---
 
